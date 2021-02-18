@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+    <title>Müşteri Detay</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+              <a class="nav-link" href="/">Anasayfa </a>
+            <li class="nav-item">
+              <a class="nav-link" href="/sirket">Şirket Bilgileri</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div style = "margin-top: 50px; margin-left: 220px;" class = "container" >
+        
+        <div class="card card-inverse" style="background-color: #333; border-color: #333; width:800px; height:500px;">
+            <div class="card-block">
+            {% for i in index %}
+              <h1 class="card-title">{{i.Musteri.musteri_isim}}</h1>
+              <hr color:"aliceblue" noshade>
+              <h3 class="card-title">Telefon:</h3>
+              <p class="card-text" style="font-size:120%;">{{i.Musteri.telefon}}</p>
+              <h3 class="card-title">Kiraladığı araç id'si:</h3>
+              <p class="card-text" style="font-size:120%;">{{i.Arac.arac_id}}</p>
+              <hr color:"aliceblue" noshade>
+              <h3 class="card-title">Fatura:</h3>
+              <div>
+                <div style="float:left">
+                    <h5 class="card-title">Aracın günlük kira fiyatı:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</h5>
+                    <p class="card-text" style="font-size:120%;">{{i.Arac.gunluk_kira_fiyati}}</p>
+
+                </div>
+               
+                <div style="float:left">
+                    <h5 class="card-title">Kira gün sayısı:</h5>
+                    <p class="card-text" style="font-size:120%;">{{i.Fatura.kira_gun}}</p>
+                </div>
+              </div>
+              <br><br><br><br>
+              <h5 class="card-title">Toplam ödeme:</h5>
+              <p class="card-text" style="font-size:120%;">{{i.Fatura.toplam_odeme}}</p>
+              {% endfor %}
+            </div>
+          </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Anasayfa</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Anasayfa <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sirket">Şirket Bilgileri</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    <div style = "margin-top: 50px;" class = "container" >
+        
+        <div>
+        <div style="float:left"><h3>Araç Kiralama</h3></div>
+        
+        <form method="POST">
+        <div style="float:right">
+        <input type="submit" formaction="/search" class="btn btn-dark" value="Ara">
+        </div>
+        <div style="float:right"><h1>&nbsp;</h1></div> 
+        <div style="float:right">
+        <input class="form-control" style ="width:500px;" placeholder="Musteri arama" type="text" name="search" >
+        </div> 
+       
+        </form>
+        </div>
+       
+        <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Araç id</th>
+                <th scope="col">Marka Model</th>
+                <th scope="col">Günlük Kira(TL)</th>
+                <th scope="col">Kira Günü</th>
+                <th scope="col">Müşteri isim</th>
+                <th scope="col">Telefon</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in index.items %}
+             <tr>
+                <style>
+                    a{ 
+                        color: black;
+                        text-decoration: none;
+                    }
+                    a:hover{
+                        color:rgb(167, 7, 7);
+                        text-decoration: none;
+                    }
+                </style>
+                
+                <th scope="row">{{i.Arac.arac_id}}</th>
+                <td>{{i.Arac.marka+" "+i.Arac.model}}</td>
+                <td>{{i.Arac.gunluk_kira_fiyati}}</td>
+                <td>{{i.Fatura.kira_gun}}</td>
+                <td><a href="{{ url_for('musteri',musteri_id=i.Musteri.musteri_id) }}">{{i.Musteri.musteri_isim}}</a></td>
+                <td>{{i.Musteri.telefon}}</td>
+                <td><a style="color:white" href="{{ url_for('update', arac_id=i.Arac.arac_id,fatura_id=i.Fatura.fatura_id,musteri_id=i.Musteri.musteri_id) }}" class="btn btn-dark">Düzenle</a></td>
+                <td><a style="color:white" href="{{ url_for('delete', arac_id=i.Arac.arac_id,fatura_id=i.Fatura.fatura_id,musteri_id=i.Musteri.musteri_id)}}" type="submit" class="btn btn-dark">Sil</a></td>
+              </tr>
+           
+            {% endfor %}
+
+            </tbody>
+          </table>
+          <a href="/add" class="btn btn-dark" role="button">Ekle</a>
+
+          <div class="text-right">
+            <a href="{{ url_for('index', page=index.prev_num) }}"
+               class="btn btn-outline-dark 
+               {% if index.page == 1 %}disabled{% endif %}">
+                &laquo;
+            </a>
+        <!-- Loop through the number of pages to display a link for each-->
+            {% for page_num in index.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+        <!-- Check for the active page and set the link to "Active"-->
+                    {% if index.page == page_num %}
+                    <a href="{{ url_for('index', page=page_num) }}"
+                       class="btn btn-dark">
+                        {{ page_num }}
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('index', page=page_num) }}"
+                       class="btn btn-outline-dark">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+                {% else %}
+                    ...
+                {% endif %}
+            {% endfor %}
+            <a href="{{ url_for('index', page=index.next_num) }}"
+               class="btn btn-outline-dark 
+               {% if index.page == index.pages %}disabled{% endif %}">
+                &raquo;
+            </a>
+        </div>
+        <p class="text-right mt-3">
+           Showing page {{ index.page }} of {{ index.pages }}
+        </p>
+           
+        </form>
+    </div>
+    
+    </body>
+</html>

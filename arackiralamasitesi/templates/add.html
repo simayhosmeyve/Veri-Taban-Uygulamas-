@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<title>Ekle</title>
+<html>
+   <body>
+    <div style = "margin-top: 100px;" class = "container" >
+    <h3>Araç Kiralama</h3>
+      <form action="/add"  method="POST" enctype="multipart/form-data" >
+        
+            <div class="form-group">
+              <input type="text" name="musteri_isim" class="form-control"  placeholder="isim">
+            </div>
+
+            <div class="form-group">
+              <input type="text" name="telefon" class="form-control"  placeholder="telefon">
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="marka" class="form-control" placeholder="marka">
+              </div>
+
+            <div class="form-group">
+                <input type="text" name="model" class="form-control" placeholder="model">
+            </div>
+
+            <div class="form-group">
+                <input type="number" name="gunluk_kira_fiyati" class="form-control" placeholder="gunluk kira fiyati">
+            </div>
+
+            <div class="form-group">
+                <input type="number" name="kira_gun" class="form-control" placeholder="kira günü">
+            </div>
+
+            <button href="/index" type="submit" class="btn btn-dark" >Ekle</button>
+      </form>
+     
+    </div>
+   </body>
+</html>
